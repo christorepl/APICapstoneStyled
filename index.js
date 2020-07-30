@@ -109,7 +109,6 @@ function getC19Results(query) {
     let covidURL = covidSearchURL + query[i]
     covidURLs.push(covidURL)
   }
-  let states = []
   let requests = covidURLs.map(url => fetch(url))
   Promise.all(requests)
     .then(function (responses) {
@@ -138,15 +137,14 @@ function enableButton() {
 
 function watchForm() {
   $('form').submit(event => {
+    event.preventDefault();
     let statesToSearch = $('#stateIds').val();
     if (statesToSearch.length === 0){
-      event.preventDefault();
       alert("Please select one or more states from the menu.")
     } else {
     disableButton();
     $('#results-list').empty();
     $('#results').removeClass('hidden');
-    event.preventDefault();
     getC19Results(statesToSearch);
     }
   });
