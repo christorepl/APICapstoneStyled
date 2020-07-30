@@ -5,10 +5,6 @@ body{
   width: 100%;
 }
 
-button, input[type="text"] {
-  padding: 5px;
-}
-
 button:hover {
   cursor: pointer;
 }
@@ -69,7 +65,7 @@ ul {
 }
 
 li {
-  font-weight: 500;
+  font-weight: 650;
   color: rgb(1, 1, 55);
   padding-top: 10px;
   text-align: center;
