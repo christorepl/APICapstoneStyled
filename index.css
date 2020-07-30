@@ -64,7 +64,7 @@ button:hover {
 }
 
 ul {
-  list-style-type: square;
+  list-style-type: none;
   list-style-position: inside;
 }
 
@@ -93,6 +93,7 @@ footer {
   padding-top: 20px;
   padding-left: 15px;
   padding-bottom: 10px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 600px) {
