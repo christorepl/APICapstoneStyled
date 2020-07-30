@@ -14,6 +14,8 @@ Users can select and deselect states using the form as shown below:
 ![selectionGif](https://raw.githubusercontent.com/christorepl/CovidPovertyLink/master/screenshots/howToSelectDeselect.gif)
 As you can see, you can remove states from the "Selected States" list by either clicking the name of the state in the "States" list or the "Selected States" list.
 
+The Population Estimates API tends to be the most problematic. Errors appear to be returned in an HTML format as opposed to a JSON object. Users only need to pause their submissions for a moment before the API will start successfully responding again.
+
 Languages/ Libaries used:
 1. Javascript
 2. HTML
@@ -27,3 +29,9 @@ API's used:
 
 Plugins used:
 1. [multi.js](https://github.com/Fabianlindfors/multi.js)
+
+Plans for improvement in V2:
+1. Add a select all button to the selection form
+2. Add a remove all button to the selection form
+3. Add data about race
+4. Make tab button easier to use in form
