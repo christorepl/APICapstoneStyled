@@ -4,84 +4,83 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Free Web tutorials">
+	<meta name="keywords" content="covid poverty link correlation API census">
+	<meta name="author" content="Christopher O'Brien">
 	<title>Correlation between COVID-19 infections and poverty</title>
-  <link rel="stylesheet" href="std.css">
+	<link rel="stylesheet" href="std.css">
 	<link rel="stylesheet" href="index.css">
-	<link rel="stylesheet" href="menuplugin/multi.css">
-   </head>
+	<link rel="stylesheet" href="menuplugin/multi.css"> </head>
 
 <body>
 	<div class="container">
 		<h1>Do COVID-19 infection rates have a correlation with poverty rates?</h1>
-    <p>Although poverty is not the only factor in determining someone's likelihood to catch COVID-19, it has <a href="https://nyulangone.org/news/racial-disparities-covid-19-related-deaths-exist-beyond-income-differences-large-us-cities">been shown to be a major factor</a> in addition to race.
-		<p>This app allows users to select one or more U.S. states and will display information about the poverty rates and COVID-19
-			rates of the given state or states. Numbers are meant to be an approximation.</p>
-		<form id="js-form">
-<select multiple="multiple" name="US-States" id="stateIds">
-  <option value="01">Alabama</option>
-  <option value="02">Alaska</option>
-  <option value="04">Arizona</option>
-  <option value="05">Arkansas</option>
-  <option value="06">California</option>
-  <option value="08">Colorado</option>
-  <option value="09">Connecticut</option>
-  <option value="10">Delaware</option>
-  <option value="12">Florida</option>
-  <option value="13">Georgia</option>
-  <option value="15">Hawaii</option>
-  <option value="16">Idaho</option>
-  <option value="17">Illinois</option>
-  <option value="18">Indiana</option>
-  <option value="19">Iowa</option>
-  <option value="20">Kansas</option>
-  <option value="21">Kentucky</option>
-  <option value="22">Louisiana</option>
-  <option value="23">Maine</option>
-  <option value="24">Maryland</option>
-  <option value="25">Massachusetts</option>
-  <option value="26">Michigan</option>
-  <option value="27">Minnesota</option>
-  <option value="28">Mississippi</option>
-  <option value="29">Missouri</option>
-  <option value="30">Montana</option>
-  <option value="31">Nebraska</option>
-  <option value="32">Nevada</option>
-  <option value="33">New Hampshire</option>
-  <option value="34">New Jersey</option>
-  <option value="35">New Mexico</option>
-  <option value="36">New York</option>
-  <option value="37">North Carolina</option>
-  <option value="38">North Dakota</option>
-  <option value="39">Ohio</option>
-  <option value="40">Oklahoma</option>
-  <option value="41">Oregon</option>
-  <option value="42">Pennsylvania</option>
-  <option value="44">Rhode Island</option>
-  <option value="45">South Carolina</option>
-  <option value="46">South Dakota</option>
-  <option value="47">Tennessee</option>
-  <option value="48">Texas</option>
-  <option value="49">Utah</option>
-  <option value="50">Vermont</option>
-  <option value="51">Virginia</option>
-  <option value="53">Washington</option>
-  <option value="54">West Virginia</option>
-  <option value="55">Wisconsin</option>
-  <option value="56">Wyoming</option>
-</select>
-      <div class="submitButton">
-			<input type="submit" value="Retrieve results"> 
-      </div>
-      </form>
-      </div>
-    
-		<section id="results" class="hidden">
-			<h2>Your search results</h2>
-			<ul id="results-list"> </ul>
-    	</section>
-  <footer>Poverty and population data is from federal census data. COVID-19 data is updated daily by the New York Times.</footer>
+		<p>Although poverty is not the only factor in determining someone's likelihood to catch COVID-19, it has <a href="https://nyulangone.org/news/racial-disparities-covid-19-related-deaths-exist-beyond-income-differences-large-us-cities">been shown to be a major factor</a> in addition to race.</p>
+			<p>To aid in researching the correlation between poverty and COVID-19, this app allows users to select one or more U.S. states and will display information about the poverty rates and COVID-19 rates of the given state or states. Numbers are meant to be an approximation.</p>
+			<form id="js-form">
+				<select multiple="multiple" name="US-States" id="stateIds">
+					<option value="01">Alabama</option>
+					<option value="02">Alaska</option>
+					<option value="04">Arizona</option>
+					<option value="05">Arkansas</option>
+					<option value="06">California</option>
+					<option value="08">Colorado</option>
+					<option value="09">Connecticut</option>
+					<option value="10">Delaware</option>
+					<option value="12">Florida</option>
+					<option value="13">Georgia</option>
+					<option value="15">Hawaii</option>
+					<option value="16">Idaho</option>
+					<option value="17">Illinois</option>
+					<option value="18">Indiana</option>
+					<option value="19">Iowa</option>
+					<option value="20">Kansas</option>
+					<option value="21">Kentucky</option>
+					<option value="22">Louisiana</option>
+					<option value="23">Maine</option>
+					<option value="24">Maryland</option>
+					<option value="25">Massachusetts</option>
+					<option value="26">Michigan</option>
+					<option value="27">Minnesota</option>
+					<option value="28">Mississippi</option>
+					<option value="29">Missouri</option>
+					<option value="30">Montana</option>
+					<option value="31">Nebraska</option>
+					<option value="32">Nevada</option>
+					<option value="33">New Hampshire</option>
+					<option value="34">New Jersey</option>
+					<option value="35">New Mexico</option>
+					<option value="36">New York</option>
+					<option value="37">North Carolina</option>
+					<option value="38">North Dakota</option>
+					<option value="39">Ohio</option>
+					<option value="40">Oklahoma</option>
+					<option value="41">Oregon</option>
+					<option value="42">Pennsylvania</option>
+					<option value="44">Rhode Island</option>
+					<option value="45">South Carolina</option>
+					<option value="46">South Dakota</option>
+					<option value="47">Tennessee</option>
+					<option value="48">Texas</option>
+					<option value="49">Utah</option>
+					<option value="50">Vermont</option>
+					<option value="51">Virginia</option>
+					<option value="53">Washington</option>
+					<option value="54">West Virginia</option>
+					<option value="55">Wisconsin</option>
+					<option value="56">Wyoming</option>
+				</select>
+				<div class="submitButton">
+					<input type="submit" value="Retrieve results"> </div>
+			</form>
+	</div>
+	<section id="results" class="hidden">
+		<h2>Your search results</h2>
+		<ul id="results-list"> </ul>
+	</section>
+	<footer>Poverty and population data is from federal census data. COVID-19 data is updated daily by the New York Times.</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="menuplugin/multi.js"></script>
+	<script src="menuplugin/multi.js"></script>
 	<script src="index.js"></script>
 </body>
 
