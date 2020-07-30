@@ -1,0 +1,106 @@
+body{
+  background-image: url(imgs/backgroundpattern.png);
+  background-repeat: repeat;
+  background-color: lightblue;
+  width: 100%;
+}
+
+button, input[type="text"] {
+  padding: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: bolder;
+  padding: 15px;
+}
+
+.container h1, .container p{
+  color: black;
+}
+
+.container h1 {
+  font-size: 20px;
+}
+
+.container p {
+  font-size: 12px;
+}
+
+.submitButton{
+  text-align: center;
+  margin-top: 15px;
+}
+
+#results-list {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  width: 95%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.stateContainer {
+  background-color: rgba(110, 107, 107, 0.354);
+  display: flex;
+  width: 50%;
+  flex-flow: column nowrap;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: 15px;
+  padding-bottom: 10px;
+  align-items: center;
+  border-style: inset;
+  border-radius: 5px;
+  border-color: gray;
+  flex: 1 0 50%
+}
+
+ul {
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+li {
+  font-weight: bolder;
+  color: rgb(1, 1, 55);
+  padding-top: 10px;
+  text-align: center;
+}
+
+.list-info{
+  color: black;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+footer {
+  font-size: 10pt;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .stateContainer {
+  background-color: rgba(110, 107, 107, 0.354);
+  display: flex;
+  width: 150%;
+  flex-flow: column nowrap;
+  flex: 1 0 45%
+}
+}
