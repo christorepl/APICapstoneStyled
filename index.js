@@ -72,7 +72,7 @@ function getPopulationResults(query) {
       displayPopulationResults(populationResponseJson)
       getPovertyResults(query);
     })
-    .catch(error => {
+    .catch(() => {
       $('#results').toggleClass('hidden')
       alert('Something went wrong with getting your information from the census database. Try again in a moment.')
       enableButton();
@@ -96,7 +96,7 @@ function getPovertyResults(query) {
       displayPovertyResults(povertyResponseJson)
       enableButton();
     })
-    .catch(error => {
+    .catch(() => {
       $('#results').toggleClass('hidden')
       alert('Something went wrong with getting your information from the poverty census database. Try again in a moment.')
       enableButton();
@@ -120,7 +120,7 @@ function getC19Results(query) {
       displayC19Results(covidResponseJson)
             getPopulationResults(query);
     })
-.catch(error => {
+.catch(() => {
       $('#results').toggleClass('hidden')
       alert('Something went wrong with getting your information from the COVID database. Try again in a moment.')
       enableButton();
