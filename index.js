@@ -52,6 +52,8 @@ function displayPovertyResults(povertyResponse) {
       </li>`
     $(`.covidRateResults${i}`).append(povertyHtml);
   }
+	$('#results').removeClass('hidden');
+	enableButton();
 }
 
 function getPopulationResults(query) {
@@ -99,7 +101,6 @@ function getPovertyResults(query) {
     .catch(() => {
       $('#results').toggleClass('hidden')
       alert('Something went wrong with getting your information from the poverty census database. Try again in a moment.')
-      enableButton();
     });
 }
 
@@ -144,7 +145,6 @@ function watchForm() {
     } else {
     disableButton();
     $('#results-list').empty();
-    $('#results').removeClass('hidden');
     getC19Results(statesToSearch);
     }
   });
