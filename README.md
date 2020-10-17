@@ -35,4 +35,4 @@ Plans for improvement in V2:
 2. Add a remove all button to the selection form
 3. Add data about race
 4. Make tab button easier to use in form
-5. Alter functions so that error messages are displayed on the page [not with alerts].
+5. Alter functions so that error messages are displayed on the page [not with alerts]
