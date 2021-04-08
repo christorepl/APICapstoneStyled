@@ -1,13 +1,13 @@
-var multi = (function() {
+var multi = (function () {
   var disabled_limit = false;
 
-  var trigger_event = function(type, el) {
+  var trigger_event = function (type, el) {
     var e = document.createEvent("HTMLEvents");
     e.initEvent(type, false, true);
     el.dispatchEvent(e);
   };
 
-  var toggle_option = function(select, event, settings) {
+  var toggle_option = function (select, event, settings) {
     var option = select.options[event.target.getAttribute("multi-index")];
 
     if (option.disabled) {
@@ -52,7 +52,7 @@ var multi = (function() {
     trigger_event("change", select);
   };
 
-  var refresh_select = function(select, settings) {
+  var refresh_select = function (select, settings) {
     select.wrapper.selected.innerHTML = "";
     select.wrapper.non_selected.innerHTML = "";
     if (settings.non_selected_header && settings.selected_header) {
@@ -99,7 +99,7 @@ var multi = (function() {
         var clone = row.cloneNode(true);
         select.wrapper.selected.appendChild(clone);
       }
-      
+
       if (
         option.parentNode.nodeName == "OPTGROUP" &&
         option.parentNode != current_optgroup
@@ -136,8 +136,7 @@ var multi = (function() {
     }
   };
 
-  var init = function(select, settings) {
-
+  var init = function (select, settings) {
     settings = typeof settings !== "undefined" ? settings : {};
 
     settings["enable_search"] =
@@ -170,13 +169,12 @@ var multi = (function() {
     if (select.nodeName != "SELECT" || !select.multiple) {
       return;
     }
-    
+
     select.style.display = "none";
     select.setAttribute("data-multijs", true);
 
     var wrapper = document.createElement("div");
     wrapper.className = "multi-wrapper";
-
 
     if (settings.enable_search) {
       var search = document.createElement("input");
@@ -184,7 +182,7 @@ var multi = (function() {
       search.type = "text";
       search.setAttribute("placeholder", settings.search_placeholder);
 
-      search.addEventListener("input", function() {
+      search.addEventListener("input", function () {
         refresh_select(select, settings);
       });
 
@@ -192,20 +190,19 @@ var multi = (function() {
       wrapper.search = search;
     }
 
-
     var non_selected = document.createElement("div");
     non_selected.className = "non-selected-wrapper";
 
     var selected = document.createElement("div");
     selected.className = "selected-wrapper";
 
-    wrapper.addEventListener("click", function(event) {
+    wrapper.addEventListener("click", function (event) {
       if (event.target.getAttribute("multi-index")) {
         toggle_option(select, event, settings);
       }
     });
 
-    wrapper.addEventListener("keypress", function(event) {
+    wrapper.addEventListener("keypress", function (event) {
       var is_action_key = event.keyCode === 32 || event.keyCode === 13;
       var is_option = event.target.getAttribute("multi-index");
 
@@ -232,7 +229,7 @@ var multi = (function() {
 
     refresh_select(select, settings);
 
-    select.addEventListener("change", function() {
+    select.addEventListener("change", function () {
       refresh_select(select, settings);
     });
   };
@@ -241,11 +238,11 @@ var multi = (function() {
 })();
 
 if (typeof jQuery !== "undefined") {
-  (function($) {
-    $.fn.multi = function(settings) {
+  (function ($) {
+    $.fn.multi = function (settings) {
       settings = typeof settings !== "undefined" ? settings : {};
 
-      return this.each(function() {
+      return this.each(function () {
         var $select = $(this);
 
         multi($select.get(0), settings);

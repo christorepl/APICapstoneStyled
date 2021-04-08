@@ -1,16 +1,21 @@
-'use strict';
+"use strict";
 
-const censusApiKey = 'e58359a5f0b6fe02b58b6c5cc56479b3f82d9918';
-var covidSearchURL = 'https://coronavirus-us-api.herokuapp.com/api/state/all?source=nyt&fips=';
-const povertySearchURL = 'https://api.census.gov/data/timeseries/poverty/saipe?time=2018&get=SAEPOVALL_PT,SAEPOVRTALL_PT&for=state:'
-const populationSearchURL = 'https://api.census.gov/data/2019/pep/population?get=POP&for=state:'
+const censusApiKey = "e58359a5f0b6fe02b58b6c5cc56479b3f82d9918";
+var covidSearchURL =
+  "https://coronavirus-us-api.herokuapp.com/api/state/all?source=nyt&fips=";
+const povertySearchURL =
+  "https://api.census.gov/data/timeseries/poverty/saipe?get=SAEPOVALL_PT,SAEPOVRTALL_PT&for=state:";
+const populationSearchURL =
+  "https://api.census.gov/data/2019/pep/population?get=POP&for=state:";
 //all three of the above API's will take fips codes for US states
 
 function displayC19Results(covidResponse) {
   const htmlStrings = [];
   for (let i = 0; i < covidResponse.length; i++) {
-    let covidData = new Intl.NumberFormat().format(covidResponse[i].locations[0].latest.confirmed)
-    let covidState = covidResponse[i].locations[0].state
+    let covidData = new Intl.NumberFormat().format(
+      covidResponse[i].locations[0].latest.confirmed
+    );
+    let covidState = covidResponse[i].locations[0].state;
     const html = `
     <div class="stateContainer">
     <h3 class="stateResults" class="resultsFor${covidState}">
@@ -22,137 +27,153 @@ function displayC19Results(covidResponse) {
      </div>`;
     htmlStrings.push(html);
   }
-  $('#results-list').prepend(htmlStrings);
-};
+  $("#results-list").prepend(htmlStrings);
+}
 
 function displayPopulationResults(populationResponse) {
   for (let i = 0; i < populationResponse.length; i++) {
-    let populationNumber = parseInt(populationResponse[i][1][0])
-    let covidNumber = document.getElementById(`covidResultId${i}`).innerHTML
-    let covidRate = (parseInt(covidNumber) / parseInt(populationNumber))
-    let covidPercent = (covidRate * 100000)
-    let populationData = new Intl.NumberFormat().format(populationResponse[i][1][0])
-    let populationHtml = `<li class="totalPopulation">Total population: <br> <span class="list-info">${populationData}</span></li>`
-    let covidPercentHtml = `<li> Rate of COVID-19 diagnosis: <br> <span class="list-info"> ${covidPercent.toFixed(2)}%</span></li>`
+    let populationNumber = parseInt(populationResponse[i][1][0]);
+    let covidNumber = document.getElementById(`covidResultId${i}`).innerHTML;
+    let covidRate = parseInt(covidNumber) / parseInt(populationNumber);
+    let covidPercent = covidRate * 100000;
+    let populationData = new Intl.NumberFormat().format(
+      populationResponse[i][1][0]
+    );
+    let populationHtml = `<li class="totalPopulation">Total population: <br> <span class="list-info">${populationData}</span></li>`;
+    let covidPercentHtml = `<li> Rate of COVID-19 diagnosis: <br> <span class="list-info"> ${covidPercent.toFixed(
+      2
+    )}%</span></li>`;
     $(`.populationResult${i}`).append(populationHtml);
-    $(`.covidRateResults${i}`).append(covidPercentHtml)
+    $(`.covidRateResults${i}`).append(covidPercentHtml);
   }
 }
 
 function displayPovertyResults(povertyResponse) {
   for (let i = 0; i < povertyResponse.length; i++) {
-    let povertyData = new Intl.NumberFormat().format(povertyResponse[i][1][0])
-    let povertyRate = new Intl.NumberFormat().format(povertyResponse[i][1][1])
+    let povertyData = new Intl.NumberFormat().format(povertyResponse[i][1][0]);
+    let povertyRate = new Intl.NumberFormat().format(povertyResponse[i][1][1]);
     const povertyHtml = `<li>
     Number of people living in poverty: <br> <span class="list-info"> ${povertyData}
     </span>
     </li>
       <li>Rate of population living in poverty: <br> <span class="list-info"> ${povertyRate}%
       </span>
-      </li>`
+      </li>`;
     $(`.covidRateResults${i}`).append(povertyHtml);
   }
-	$('#results').removeClass('hidden');
-	enableButton();
+  $("#results").removeClass("hidden");
+  enableButton();
 }
 
 function getPopulationResults(query) {
-  let populationURLs = []
+  let populationURLs = [];
   for (let i = 0; i < query.length; i++) {
     let populationURL = populationSearchURL + query[i] + "&key=" + censusApiKey;
-    populationURLs.push(populationURL)
+    populationURLs.push(populationURL);
   }
 
-  let requests = populationURLs.map(url => fetch(url))
+  let requests = populationURLs.map((url) => fetch(url));
   Promise.all(requests)
     .then(function (responses) {
-      return Promise.all(responses.map(function (response) {
-        return response.json();
-      }))
+      return Promise.all(
+        responses.map(function (response) {
+          return response.json();
+        })
+      );
     })
-    .then(populationResponseJson => {
-      displayPopulationResults(populationResponseJson)
+    .then((populationResponseJson) => {
+      displayPopulationResults(populationResponseJson);
       getPovertyResults(query);
     })
     .catch(() => {
-      $('#results').toggleClass('hidden')
-      alert('Something went wrong with getting your information from the census database. Try again in a moment.')
+      $("#results").toggleClass("hidden");
+      alert(
+        "Something went wrong with getting your information from the census database. Try again in a moment."
+      );
       enableButton();
     });
 }
 
 function getPovertyResults(query) {
-  let povertyURLs = []
+  let povertyURLs = [];
   for (let i = 0; i < query.length; i++) {
-    let povertyURL = povertySearchURL + query[i]
-    povertyURLs.push(povertyURL)
+    let povertyURL = povertySearchURL + query[i];
+    povertyURLs.push(povertyURL);
   }
-  let requests = povertyURLs.map(url => fetch(url))
+  let requests = povertyURLs.map((url) => fetch(url));
   Promise.all(requests)
     .then(function (responses) {
-      return Promise.all(responses.map(function (response) {
-        return response.json();
-      }))
+      return Promise.all(
+        responses.map(function (response) {
+          return response.json();
+        })
+      );
     })
-    .then(povertyResponseJson => {
-      displayPovertyResults(povertyResponseJson)
+    .then((povertyResponseJson) => {
+      displayPovertyResults(povertyResponseJson);
       enableButton();
     })
     .catch(() => {
-      $('#results').toggleClass('hidden')
-      alert('Something went wrong with getting your information from the poverty census database. Try again in a moment.')
+      $("#results").toggleClass("hidden");
+      alert(
+        "Something went wrong with getting your information from the poverty census database. Try again in a moment."
+      );
     });
 }
 
 function getC19Results(query) {
-  let covidURLs = []
+  let covidURLs = [];
   for (let i = 0; i < query.length; i++) {
-    let covidURL = covidSearchURL + query[i]
-    covidURLs.push(covidURL)
+    let covidURL = covidSearchURL + query[i];
+    covidURLs.push(covidURL);
   }
-  let requests = covidURLs.map(url => fetch(url))
+  let requests = covidURLs.map((url) => fetch(url));
   Promise.all(requests)
     .then(function (responses) {
-      return Promise.all(responses.map(function (response) {
-        return response.json();
-      }))
+      return Promise.all(
+        responses.map(function (response) {
+          return response.json();
+        })
+      );
     })
-    .then(covidResponseJson => {
-      displayC19Results(covidResponseJson)
-            getPopulationResults(query);
+    .then((covidResponseJson) => {
+      displayC19Results(covidResponseJson);
+      getPopulationResults(query);
     })
-.catch(() => {
-      $('#results').toggleClass('hidden')
-      alert('Something went wrong with getting your information from the COVID database. Try again in a moment.')
+    .catch(() => {
+      $("#results").toggleClass("hidden");
+      alert(
+        "Something went wrong with getting your information from the COVID database. Try again in a moment."
+      );
       enableButton();
     });
 }
 
 function disableButton() {
-  $(".submitButton").prop("disabled", true)
+  $(".submitButton").prop("disabled", true);
 }
 
 function enableButton() {
-  $(".submitButton").prop("disabled", false)
+  $(".submitButton").prop("disabled", false);
 }
 
 function watchForm() {
-  $('form').submit(event => {
+  $("form").submit((event) => {
     event.preventDefault();
-    let statesToSearch = $('#stateIds').val();
-    if (statesToSearch.length === 0){
-      alert("Please select one or more states from the menu.")
+    let statesToSearch = $("#stateIds").val();
+    if (statesToSearch.length === 0) {
+      alert("Please select one or more states from the menu.");
     } else {
-    disableButton();
-    $('#results-list').empty();
-    getC19Results(statesToSearch);
+      disableButton();
+      $("#results-list").empty();
+      getC19Results(statesToSearch);
     }
   });
 }
 
 $("#stateIds").multi({
-	  non_selected_header: 'States',
-	  selected_header: 'Selected States'
+  non_selected_header: "States",
+  selected_header: "Selected States",
 });
 
 $(watchForm);

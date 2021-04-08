@@ -1,4 +1,4 @@
-body{
+body {
   background-image: url(imgs/backgroundpattern.png);
   background-repeat: repeat;
   background-color: lightblue;
@@ -16,7 +16,8 @@ button:hover {
   padding: 15px;
 }
 
-.container h1, .container p{
+.container h1,
+.container p {
   color: black;
 }
 
@@ -28,7 +29,7 @@ button:hover {
   font-size: 12px;
 }
 
-.submitButton{
+.submitButton {
   text-align: center;
   margin-top: 15px;
 }
@@ -60,7 +61,7 @@ h3 {
   border-style: inset;
   border-radius: 5px;
   border-color: gray;
-  flex: 1 0 50%
+  flex: 1 0 50%;
 }
 
 ul {
@@ -75,7 +76,7 @@ li {
   text-align: center;
 }
 
-.list-info{
+.list-info {
   color: black;
   font-weight: 400;
 }
@@ -98,10 +99,10 @@ footer {
 
 @media only screen and (min-width: 600px) {
   .stateContainer {
-  background-color: rgba(110, 107, 107, 0.354);
-  display: flex;
-  width: 150%;
-  flex-flow: column nowrap;
-  flex: 1 0 45%
-}
+    background-color: rgba(110, 107, 107, 0.354);
+    display: flex;
+    width: 150%;
+    flex-flow: column nowrap;
+    flex: 1 0 45%;
+  }
 }
