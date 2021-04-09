@@ -4,7 +4,7 @@ const censusApiKey = "e58359a5f0b6fe02b58b6c5cc56479b3f82d9918";
 var covidSearchURL =
   "https://coronavirus-us-api.herokuapp.com/api/state/all?source=nyt&fips=";
 const povertySearchURL =
-  "https://api.census.gov/data/timeseries/poverty/saipe?time=2018&get=SAEPOVALL_PT,SAEPOVRTALL_PT&for=state:";
+  "https://api.census.gov/data/timeseries/poverty/saipe?time=2019&get=SAEPOVALL_PT,SAEPOVRTALL_PT&for=state:";
 const populationSearchURL =
   "https://api.census.gov/data/2019/pep/population?get=POP&for=state:";
 //all three of the above API's will take fips codes for US states
